@@ -4,6 +4,7 @@ import { CardContent } from "./components/CardContent"
 import { Header } from "./components/Header/Header"
 import { useState } from "react"
 import { FormTask } from "./components/FormTask"
+import { List } from "./components/List"
 
 interface IFormTaskProps {
   task: string,
@@ -55,34 +56,35 @@ export function App() {
       <FormTask onAdd={(task, description, taskPoints, complete) => handleAddTask({ task, description, taskPoints, complete })} />
 
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 20 }}>
-        <p>Produtos:</p>
-        {list.map((item) => (
-          <Card key={item.id}>
-            <CardTitle>
-              <h1>
-                {item.task}
-              </h1>
-              {!item.complete ? (
-                <button style={{ height: '30px', backgroundColor: 'red', color: '#fff', border: 'none', borderRadius: '4px' }} onClick={() => handleDeleteTask(item.id)}>
-                  Delete
-                </button>
-              ) : (
-                <span style={{ fontSize: '16px', color: 'green' }}>Completed</span>
-              )}
-            </CardTitle>
-            <CardContent>
-              <p style={{ fontSize: '14px', color: 'gray', padding: '0px 14px' }}>{item.description}</p>
-              <p>Get <span style={{ fontSize: '20px', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: '5px', backgroundColor: 'green', padding: '6px' }}>{item.taskPoints}</span> points</p>
-            </CardContent>
-            {!item.complete && <button
-              style={{ color: '#fff', cursor: 'pointer', backgroundColor: 'green', border: 'none', padding: '10px', borderRadius: '5px', marginBottom: '10px', width: '100%' }}
-              onClick={() => handleCompleteTask(item.id)}
-            >
-              Done!
-            </button>
-            }
-          </Card>
-        ))}
+        <List>
+          {list.map((item) => (
+            <Card key={item.id}>
+              <CardTitle>
+                <h1>
+                  {item.task}
+                </h1>
+                {!item.complete ? (
+                  <button style={{ height: '30px', backgroundColor: 'red', color: '#fff', border: 'none', borderRadius: '4px' }} onClick={() => handleDeleteTask(item.id)}>
+                    Delete
+                  </button>
+                ) : (
+                  <span style={{ fontSize: '16px', color: 'green' }}>Completed</span>
+                )}
+              </CardTitle>
+              <CardContent>
+                <p style={{ fontSize: '14px', color: 'gray', padding: '0px 14px' }}>{item.description}</p>
+                <p>Get <span style={{ fontSize: '20px', color: '#fff', fontWeight: 'bold', border: 'none', borderRadius: '5px', backgroundColor: 'green', padding: '6px' }}>{item.taskPoints}</span> points</p>
+              </CardContent>
+              {!item.complete && <button
+                style={{ color: '#fff', cursor: 'pointer', backgroundColor: 'green', border: 'none', padding: '10px', borderRadius: '5px', marginBottom: '10px', width: '100%' }}
+                onClick={() => handleCompleteTask(item.id)}
+              >
+                Done!
+              </button>
+              }
+            </Card>
+          ))}
+        </List>
       </div >
     </>
   )
