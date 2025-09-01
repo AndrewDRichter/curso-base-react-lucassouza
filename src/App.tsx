@@ -4,6 +4,7 @@ import { FormTask } from "./components/FormTask"
 import { List } from "./components/List"
 import { TodoItem } from "./components/TodoItem"
 import { Footer } from "./components/Footer/Footer"
+import { TodoAPI } from "./shared/services/api/TodoAPI"
 
 interface IFormTaskProps {
   task: string,
@@ -11,6 +12,8 @@ interface IFormTaskProps {
   taskPoints: number,
   complete: boolean
 }
+
+TodoAPI.getAll().then(data => console.log(data));
 
 export function App() {
   const [list, setList] = useState([
